@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marks Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label, input {
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Student Marks Table</h1>
+
+    <form id="studentForm">
+        <label for="studentName">Student Name:</label>
+        <input type="text" id="studentName" required>
+
+        <label for="rollNumber">Roll Number:</label>
+        <input type="text" id="rollNumber" required>
+
+        <label for="dlvs">DLVS Marks:</label>
+        <input type="number" id="dlvs" required>
+
+        <label for="pp">PP Marks:</label>
+        <input type="number" id="pp" required>
+
+        <label for="wt">WT Marks:</label>
+        <input type="number" id="wt" required>
+
+        <label for="se">SE Marks:</label>
+        <input type="number" id="se" required>
+
+        <label for="daa">DAA Marks:</label>
+        <input type="number" id="daa" required>
+
+        <button type="button" onclick="createTable()">Create Table</button>
+    </form>
+
+    <div id="tableContainer"></div>
+
+    <script>
+        function createTable() {
+            // Get input values
+            var studentName = document.getElementById("studentName").value;
+            var rollNumber = document.getElementById("rollNumber").value;
+            var dlvsMarks = parseFloat(document.getElementById("dlvs").value);
+            var ppMarks = parseFloat(document.getElementById("pp").value);
+            var wtMarks = parseFloat(document.getElementById("wt").value);
+            var seMarks = parseFloat(document.getElementById("se").value);
+            var daaMarks = parseFloat(document.getElementById("daa").value);
+
+            // Calculate total marks
+            var totalMarks = dlvsMarks + ppMarks + wtMarks + seMarks + daaMarks;
+
+            // Create dynamic table
+            var tableContainer = document.getElementById("tableContainer");
+            var table = document.createElement("table");
+            table.setAttribute("border", "1");
+
+            var headerRow = table.insertRow(0);
+            var headers = ["Student Name", "Roll Number", "DLVS", "PP", "WT", "SE", "DAA", "Total Marks"];
+            
+            for (var i = 0; i < headers.length; i++) {
+                var headerCell = headerRow.insertCell(i);
+                headerCell.innerHTML = headers[i];
+            }
+
+            var dataRow = table.insertRow(1);
+            var dataCells = [studentName, rollNumber, dlvsMarks, ppMarks, wtMarks, seMarks, daaMarks, totalMarks];
+
+            for (var j = 0; j < dataCells.length; j++) {
+                var dataCell = dataRow.insertCell(j);
+                dataCell.innerHTML = dataCells[j];
+            }
+
+            tableContainer.innerHTML = "";
+            tableContainer.appendChild(table);
+        }
+    </script>
+
+</body>
+</html>
